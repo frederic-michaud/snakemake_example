@@ -1,0 +1,70 @@
+
+
+configfile: "config.yaml"
+
+list_optional_step = ["D","C","Cprime","B"]
+list_condition = [config[step] if step in config.keys() else True for step in list_optional_step]
+ultimate_step = "E"
+first_step = "A"
+active_step = ultimate_step
+precedent_step = dict()
+for index_step, step in enumerate(list_optional_step):
+    if list_condition[index_step]:
+        precedent_step[active_step] = step
+        active_step = step
+precedent_step[active_step] = first_step
+#print(precedent_step)
+
+
+def get_input(wildcards, step):
+    step_to_do = precedent_step[step]
+    return(f"{wildcards.fileName}_{step_to_do}.txt")
+
+
+rule make_A:
+    input:
+        "external_file.txt"
+    output:
+        "{fileName}_A.txt"
+    shell:
+        "cp {input} {output}"
+
+rule make_B:
+    input:
+         lambda wildcards: get_input(wildcards, "B")
+    output:
+        "{fileName}_B.txt"
+    shell:
+        "cp {input} {output}"
+
+rule make_C:
+    input:
+        lambda wildcards: get_input(wildcards, "C")
+    output:
+        "{fileName}_C.txt"
+    shell:
+        "cp {input} {output}"
+
+rule make_Cprime:
+    input:
+        lambda wildcards: get_input(wildcards, "Cprime")
+    output:
+        "{fileName}_Cprime.txt"
+    shell:
+        "cp {input} {output}"
+
+rule make_D:
+    input:
+        lambda wildcards: get_input(wildcards, "D")
+    output:
+        "{fileName}_D.txt"
+    shell:
+        "cp {input} {output}"
+
+rule make_E:
+    input:
+        lambda wildcards: get_input(wildcards, "E")
+    output:
+        "{fileName}_E.txt"
+    shell:
+        "cp {input} {output}"
