@@ -1,0 +1,71 @@
+import pandas as pd
+import numpy as np
+
+
+db = pd.read_csv("db.csv", sep="\t")
+
+
+#Building dictionary for samples
+all_samples = np.unique(db["SM"])
+sample_to_library = {}
+for sample in all_samples:
+    sample_to_library[str(sample)] = list(db[db["SM"]==sample]["LB"])
+
+#Building dictionnary for libraries
+all_libraries = np.unique(db["LB"])
+library_to_fastq = {}
+for library in all_libraries:
+    library_to_fastq[str(library)] = list(db[db["LB"]==library]["ID"])
+
+def get_filename_fastq(id):
+    filename = db[db["ID"]==id]["Data"].values
+    return(filename)
+
+def get_sample(id_individual):
+    list_of_sample_file_name = ["filter/{}.bam".format(id_sample) for id_sample in sample_to_library[id_individual]]
+    return(list_of_sample_file_name)
+
+#print(library_to_fastq)
+def get_fastq(id_library):
+    all_id_fastq = library_to_fastq[id_library]
+    list_of_fastq_file_name = ["filter/{}.fastq".format(id_fastq) for id_fastq in all_id_fastq]
+    return(list_of_fastq_file_name)
+    
+
+rule make_all_sample:
+    input:
+        expand("sample/{id_sample}.bam", id_sample=all_samples)
+
+
+rule filter_fastq:
+    input:
+        all_sample=lambda wildcards: get_filename_fastq(wildcards.id_fastq)
+    output:
+        "filter/{id_fastq}.fastq"
+    shell:
+        "cp {input} {output}"
+
+rule fastq_to_bam:
+    input:
+        all_sample=lambda wildcards: get_fastq(wildcards.id_library)
+    output:
+        "{id_library}.bam"
+    shell:
+        "cat {input} > {output}"
+
+rule filter_bam_library:
+    input:
+        "{id_library}.bam"
+    output:
+        "filter/{id_library}.bam"
+    shell:
+        "cp {input} {output}"
+
+
+rule merge_bam_library_to_bam_sample:
+    input:
+        all_sample=lambda wildcards: get_sample(wildcards.id_sample)
+    output:
+        "sample/{id_sample}.bam"
+    shell:
+        "cat {input} > {output}"

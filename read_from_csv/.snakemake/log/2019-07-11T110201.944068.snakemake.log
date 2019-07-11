@@ -1,0 +1,209 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	4	fastq_to_bam
+	4	filter_bam_library
+	7	filter_fastq
+	1	make_all_sample
+	2	merge_bam_library_to_bam_sample
+	18
+
+[Thu Jul 11 11:02:02 2019]
+rule filter_fastq:
+    input: reads/b_L2_R1_001.fastq.gz
+    output: filter/b_L2_R1_001.fastq
+    jobid: 16
+    wildcards: id_fastq=b_L2_R1_001
+
+[Thu Jul 11 11:02:02 2019]
+Finished job 16.
+1 of 18 steps (6%) done
+
+[Thu Jul 11 11:02:02 2019]
+rule filter_fastq:
+    input: reads/c_L2_R2_002.fastq.gz
+    output: filter/c_L2_R2_002.fastq
+    jobid: 12
+    wildcards: id_fastq=c_L2_R2_002
+
+[Thu Jul 11 11:02:02 2019]
+Finished job 12.
+2 of 18 steps (11%) done
+
+[Thu Jul 11 11:02:02 2019]
+rule filter_fastq:
+    input: reads/a_L2_R1_002.fastq.gz
+    output: filter/a_L2_R1_002.fastq
+    jobid: 15
+    wildcards: id_fastq=a_L2_R1_002
+
+[Thu Jul 11 11:02:02 2019]
+Finished job 15.
+3 of 18 steps (17%) done
+
+[Thu Jul 11 11:02:02 2019]
+rule filter_fastq:
+    input: reads/b_L2_R1_002.fastq.gz
+    output: filter/b_L2_R1_002.fastq
+    jobid: 17
+    wildcards: id_fastq=b_L2_R1_002
+
+[Thu Jul 11 11:02:02 2019]
+Finished job 17.
+4 of 18 steps (22%) done
+
+[Thu Jul 11 11:02:02 2019]
+rule fastq_to_bam:
+    input: filter/b_L2_R1_001.fastq, filter/b_L2_R1_002.fastq
+    output: b_L2.bam
+    jobid: 10
+    wildcards: id_library=b_L2
+
+[Thu Jul 11 11:02:02 2019]
+Finished job 10.
+5 of 18 steps (28%) done
+
+[Thu Jul 11 11:02:02 2019]
+rule filter_bam_library:
+    input: b_L2.bam
+    output: filter/b_L2.bam
+    jobid: 6
+    wildcards: id_library=b_L2
+
+[Thu Jul 11 11:02:02 2019]
+Finished job 6.
+6 of 18 steps (33%) done
+
+[Thu Jul 11 11:02:02 2019]
+rule filter_fastq:
+    input: reads/a_L2_R1_001.fastq.gz
+    output: filter/a_L2_R1_001.fastq
+    jobid: 14
+    wildcards: id_fastq=a_L2_R1_001
+
+[Thu Jul 11 11:02:02 2019]
+Finished job 14.
+7 of 18 steps (39%) done
+
+[Thu Jul 11 11:02:02 2019]
+rule filter_fastq:
+    input: reads/d_L2_R2_001.fastq.gz
+    output: filter/d_L2_R2_001.fastq
+    jobid: 13
+    wildcards: id_fastq=d_L2_R2_001
+
+[Thu Jul 11 11:02:02 2019]
+Finished job 13.
+8 of 18 steps (44%) done
+
+[Thu Jul 11 11:02:02 2019]
+rule fastq_to_bam:
+    input: filter/d_L2_R2_001.fastq
+    output: d_L2.bam
+    jobid: 8
+    wildcards: id_library=d_L2
+
+[Thu Jul 11 11:02:02 2019]
+Finished job 8.
+9 of 18 steps (50%) done
+
+[Thu Jul 11 11:02:02 2019]
+rule filter_bam_library:
+    input: d_L2.bam
+    output: filter/d_L2.bam
+    jobid: 4
+    wildcards: id_library=d_L2
+
+[Thu Jul 11 11:02:02 2019]
+Finished job 4.
+10 of 18 steps (56%) done
+
+[Thu Jul 11 11:02:03 2019]
+rule fastq_to_bam:
+    input: filter/a_L2_R1_001.fastq, filter/a_L2_R1_002.fastq
+    output: a_L2.bam
+    jobid: 9
+    wildcards: id_library=a_L2
+
+[Thu Jul 11 11:02:03 2019]
+Finished job 9.
+11 of 18 steps (61%) done
+
+[Thu Jul 11 11:02:03 2019]
+rule filter_bam_library:
+    input: a_L2.bam
+    output: filter/a_L2.bam
+    jobid: 5
+    wildcards: id_library=a_L2
+
+[Thu Jul 11 11:02:03 2019]
+Finished job 5.
+12 of 18 steps (67%) done
+
+[Thu Jul 11 11:02:03 2019]
+rule merge_bam_library_to_bam_sample:
+    input: filter/a_L2.bam, filter/a_L2.bam, filter/b_L2.bam, filter/b_L2.bam
+    output: sample/ind1_tooth.bam
+    jobid: 2
+    wildcards: id_sample=ind1_tooth
+
+[Thu Jul 11 11:02:03 2019]
+Finished job 2.
+13 of 18 steps (72%) done
+
+[Thu Jul 11 11:02:03 2019]
+rule filter_fastq:
+    input: reads/c_L2_R2_001.fastq.gz
+    output: filter/c_L2_R2_001.fastq
+    jobid: 11
+    wildcards: id_fastq=c_L2_R2_001
+
+[Thu Jul 11 11:02:03 2019]
+Finished job 11.
+14 of 18 steps (78%) done
+
+[Thu Jul 11 11:02:03 2019]
+rule fastq_to_bam:
+    input: filter/c_L2_R2_001.fastq, filter/c_L2_R2_002.fastq
+    output: c_L2.bam
+    jobid: 7
+    wildcards: id_library=c_L2
+
+[Thu Jul 11 11:02:03 2019]
+Finished job 7.
+15 of 18 steps (83%) done
+
+[Thu Jul 11 11:02:03 2019]
+rule filter_bam_library:
+    input: c_L2.bam
+    output: filter/c_L2.bam
+    jobid: 3
+    wildcards: id_library=c_L2
+
+[Thu Jul 11 11:02:03 2019]
+Finished job 3.
+16 of 18 steps (89%) done
+
+[Thu Jul 11 11:02:03 2019]
+rule merge_bam_library_to_bam_sample:
+    input: filter/c_L2.bam, filter/c_L2.bam, filter/d_L2.bam
+    output: sample/ind1_bones.bam
+    jobid: 1
+    wildcards: id_sample=ind1_bones
+
+[Thu Jul 11 11:02:03 2019]
+Finished job 1.
+17 of 18 steps (94%) done
+
+[Thu Jul 11 11:02:03 2019]
+localrule make_all_sample:
+    input: sample/ind1_bones.bam, sample/ind1_tooth.bam
+    jobid: 0
+
+[Thu Jul 11 11:02:03 2019]
+Finished job 0.
+18 of 18 steps (100%) done
+Complete log: /Users/fmichaud/snakemake_tricks/read_from_csv/.snakemake/log/2019-07-11T110201.944068.snakemake.log

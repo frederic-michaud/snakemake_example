@@ -1,0 +1,8 @@
+ID	Data	MAPQ	LB	PL	SM
+a_L2_R1_001	reads/a_L2_R1_001.fastq.gz	30	a_L2	ILLUMINA	ind1_tooth
+a_L2_R1_002	reads/a_L2_R1_002.fastq.gz	30	a_L2	ILLUMINA	ind1_tooth
+b_L2_R1_001	reads/b_L2_R1_001.fastq.gz	30	b_L2	ILLUMINA	ind1_tooth
+b_L2_R1_002	reads/b_L2_R1_002.fastq.gz	30	b_L2	ILLUMINA	ind1_tooth
+c_L2_R2_001	reads/c_L2_R2_001.fastq.gz	30	c_L2	ILLUMINA	ind1_bones
+c_L2_R2_002	reads/c_L2_R2_002.fastq.gz	30	c_L2	ILLUMINA	ind1_bones
+d_L2_R2_001	reads/d_L2_R2_001.fastq.gz	30	d_L2	ILLUMINA	ind1_bones
