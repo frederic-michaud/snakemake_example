@@ -1,0 +1,13 @@
+samples:
+    sample1:
+        a_L2: 
+            a_L2_R1_001: reads/a_L2_R1_001.fastq.gz
+        b_L2:
+            b_L2_R1_001: reads/b_L2_R1_001.fastq.gz
+            b_L2_R1_002: reads/b_L2_R1_002.fastq.gz
+    sample2:
+        a_L3: 
+            d_L2_R1_001: reads/a_L2_R1_001.fastq.gz
+            e_L2_R1_002: reads/b_L2_R1_002.fastq.gz
+        b_L4:
+            e_L2_R1_001: reads/b_L2_R1_001.fastq.gz

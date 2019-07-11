@@ -1,0 +1,153 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	6	fastq_to_bam
+	1	make_all_sample
+	4	merge_file_to_library
+	2	merge_library_to_sample
+	13
+
+[Thu Jul 11 10:59:37 2019]
+rule fastq_to_bam:
+    input: reads/b_L2_R1_002.fastq.gz
+    output: file/sample1/b_L2/b_L2_R1_002.bam
+    jobid: 9
+    wildcards: id_sample=sample1, id_library=b_L2, id_file=b_L2_R1_002
+
+[Thu Jul 11 10:59:37 2019]
+Finished job 9.
+1 of 13 steps (8%) done
+
+[Thu Jul 11 10:59:37 2019]
+rule fastq_to_bam:
+    input: reads/a_L2_R1_001.fastq.gz
+    output: file/sample1/a_L2/a_L2_R1_001.bam
+    jobid: 7
+    wildcards: id_sample=sample1, id_library=a_L2, id_file=a_L2_R1_001
+
+[Thu Jul 11 10:59:37 2019]
+Finished job 7.
+2 of 13 steps (15%) done
+
+[Thu Jul 11 10:59:37 2019]
+rule fastq_to_bam:
+    input: reads/b_L2_R1_001.fastq.gz
+    output: file/sample2/b_L4/e_L2_R1_001.bam
+    jobid: 12
+    wildcards: id_sample=sample2, id_library=b_L4, id_file=e_L2_R1_001
+
+[Thu Jul 11 10:59:37 2019]
+Finished job 12.
+3 of 13 steps (23%) done
+
+[Thu Jul 11 10:59:37 2019]
+rule fastq_to_bam:
+    input: reads/b_L2_R1_002.fastq.gz
+    output: file/sample2/a_L3/e_L2_R1_002.bam
+    jobid: 11
+    wildcards: id_sample=sample2, id_library=a_L3, id_file=e_L2_R1_002
+
+[Thu Jul 11 10:59:37 2019]
+Finished job 11.
+4 of 13 steps (31%) done
+
+[Thu Jul 11 10:59:37 2019]
+rule fastq_to_bam:
+    input: reads/b_L2_R1_001.fastq.gz
+    output: file/sample1/b_L2/b_L2_R1_001.bam
+    jobid: 8
+    wildcards: id_sample=sample1, id_library=b_L2, id_file=b_L2_R1_001
+
+[Thu Jul 11 10:59:37 2019]
+Finished job 8.
+5 of 13 steps (38%) done
+
+[Thu Jul 11 10:59:37 2019]
+rule merge_file_to_library:
+    input: file/sample1/b_L2/b_L2_R1_001.bam, file/sample1/b_L2/b_L2_R1_002.bam
+    output: lib/sample1/b_L2.bam
+    jobid: 4
+    wildcards: id_sample=sample1, id_library=b_L2
+
+[Thu Jul 11 10:59:37 2019]
+Finished job 4.
+6 of 13 steps (46%) done
+
+[Thu Jul 11 10:59:37 2019]
+rule fastq_to_bam:
+    input: reads/a_L2_R1_001.fastq.gz
+    output: file/sample2/a_L3/d_L2_R1_001.bam
+    jobid: 10
+    wildcards: id_sample=sample2, id_library=a_L3, id_file=d_L2_R1_001
+
+[Thu Jul 11 10:59:37 2019]
+Finished job 10.
+7 of 13 steps (54%) done
+
+[Thu Jul 11 10:59:37 2019]
+rule merge_file_to_library:
+    input: file/sample2/a_L3/d_L2_R1_001.bam, file/sample2/a_L3/e_L2_R1_002.bam
+    output: lib/sample2/a_L3.bam
+    jobid: 5
+    wildcards: id_sample=sample2, id_library=a_L3
+
+[Thu Jul 11 10:59:37 2019]
+Finished job 5.
+8 of 13 steps (62%) done
+
+[Thu Jul 11 10:59:37 2019]
+rule merge_file_to_library:
+    input: file/sample2/b_L4/e_L2_R1_001.bam
+    output: lib/sample2/b_L4.bam
+    jobid: 6
+    wildcards: id_sample=sample2, id_library=b_L4
+
+[Thu Jul 11 10:59:37 2019]
+Finished job 6.
+9 of 13 steps (69%) done
+
+[Thu Jul 11 10:59:37 2019]
+rule merge_library_to_sample:
+    input: lib/sample2/a_L3.bam, lib/sample2/b_L4.bam
+    output: sample/sample2.bam
+    jobid: 2
+    wildcards: id_sample=sample2
+
+[Thu Jul 11 10:59:37 2019]
+Finished job 2.
+10 of 13 steps (77%) done
+
+[Thu Jul 11 10:59:38 2019]
+rule merge_file_to_library:
+    input: file/sample1/a_L2/a_L2_R1_001.bam
+    output: lib/sample1/a_L2.bam
+    jobid: 3
+    wildcards: id_sample=sample1, id_library=a_L2
+
+[Thu Jul 11 10:59:38 2019]
+Finished job 3.
+11 of 13 steps (85%) done
+
+[Thu Jul 11 10:59:38 2019]
+rule merge_library_to_sample:
+    input: lib/sample1/a_L2.bam, lib/sample1/b_L2.bam
+    output: sample/sample1.bam
+    jobid: 1
+    wildcards: id_sample=sample1
+
+[Thu Jul 11 10:59:38 2019]
+Finished job 1.
+12 of 13 steps (92%) done
+
+[Thu Jul 11 10:59:38 2019]
+localrule make_all_sample:
+    input: sample/sample1.bam, sample/sample2.bam
+    jobid: 0
+
+[Thu Jul 11 10:59:38 2019]
+Finished job 0.
+13 of 13 steps (100%) done
+Complete log: /Users/fmichaud/snakemake_tricks/read_from_yaml/.snakemake/log/2019-07-11T105937.505906.snakemake.log

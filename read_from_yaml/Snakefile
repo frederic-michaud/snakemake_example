@@ -1,0 +1,48 @@
+configfile: "config.yaml"
+
+
+def get_sample(wildcards):
+    list_of_sample_file_name = ["lib/{}/{}.bam".format(wildcards.id_sample,id_library) for id_library in config["samples"][wildcards.id_sample]]
+    return(list_of_sample_file_name)
+
+def get_fastq(wildcards):
+    all_id_fastq = config["samples"][wildcards.id_sample][wildcards.id_library][wildcards.id_file]
+    return(all_id_fastq)
+
+def get_library(wildcards):
+    all_id_fastq = config["samples"][wildcards.id_sample][wildcards.id_library]
+    list_of_sample_file_name = ["file/{}/{}/{}.bam".format(wildcards.id_sample,wildcards.id_library, id_file) for id_file in all_id_fastq]
+    return(list_of_sample_file_name)
+    
+# Getting all samples to be build
+
+all_samples = config["samples"].keys()
+rule make_all_sample:
+    input:
+        expand("sample/{id_sample}.bam", id_sample=all_samples)
+
+
+rule fastq_to_bam:
+    input:
+        get_fastq
+    output:
+        "file/{id_sample}/{id_library}/{id_file}.bam"
+    shell:
+        "cat {input} > {output}"
+
+rule merge_file_to_library:
+    input:
+       get_library
+    output:
+        "lib/{id_sample}/{id_library}.bam"
+    shell:
+        "cat {input} > {output}"
+
+
+rule merge_library_to_sample:
+    input:
+        get_sample
+    output:
+        "sample/{id_sample}.bam"
+    shell:
+        "cat {input} > {output}"
